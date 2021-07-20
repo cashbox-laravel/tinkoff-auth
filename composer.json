@@ -34,7 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Helldar\\CashierDriver\\Tinkoff\\Auth": "src"
+            "Helldar\\CashierDriver\\Tinkoff\\Auth\\": "src"
         }
     },
     "config": {
