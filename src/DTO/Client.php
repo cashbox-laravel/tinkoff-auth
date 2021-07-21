@@ -3,6 +3,7 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
 use Helldar\Support\Concerns\Makeable;
+use Helldar\Support\Facades\Helpers\Arr;
 
 class Client
 {
@@ -14,12 +15,7 @@ class Client
 
     protected $hash = true;
 
-    public function hash(bool $hash = true): Client
-    {
-        $this->hash = $hash;
-
-        return $this;
-    }
+    protected $data = [];
 
     public function clientId(string $client_id): Client
     {
@@ -43,6 +39,30 @@ class Client
     public function getClientSecret(): string
     {
         return $this->client_secret;
+    }
+
+    public function hash(bool $hash = true): Client
+    {
+        $this->hash = $hash;
+
+        return $this;
+    }
+
+    public function data(array $data): Client
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    public function getPaymentId(): ?string
+    {
+        return Arr::get($this->data, 'PaymentId');
     }
 
     public function hasHash(): bool

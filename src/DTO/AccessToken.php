@@ -4,10 +4,10 @@ namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
 use Carbon\Carbon;
 use Helldar\Support\Concerns\Makeable;
+use Helldar\Support\Facades\Helpers\Arr;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
 
-class AccessToken implements Arrayable, Jsonable
+class AccessToken implements Arrayable
 {
     use Makeable;
 
@@ -15,13 +15,16 @@ class AccessToken implements Arrayable, Jsonable
 
     protected $terminal;
 
-    public function __construct(array $data)
+    protected $map = [
+        'TerminalKey' => 'terminal',
+        'Token'       => 'access_token',
+    ];
+
+    public function __construct(array $items = [])
     {
-        foreach ($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->{$key} = $value;
-            }
-        }
+        $items = Arr::renameKeysMap($items, $this->map);
+
+        $this->set($items);
     }
 
     public function getAccessToken(): string
@@ -47,8 +50,12 @@ class AccessToken implements Arrayable, Jsonable
         ];
     }
 
-    public function toJson($options = 0): string
+    protected function set(array $items)
     {
-        return json_encode($this->toArray());
+        foreach ($items as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            }
+        }
     }
 }
