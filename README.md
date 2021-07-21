@@ -30,7 +30,8 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```php
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
-use Helldar\Cashier\Services\Driver as BaseDriver;use Helldar\CashierDriver\Tinkoff\Auth\Concerns\Authorize;
+use Helldar\Cashier\Services\Driver as BaseDriver;
+use Helldar\CashierDriver\Tinkoff\Auth\Concerns\Authorize;
 
 class Driver extends BaseDriver
 {
