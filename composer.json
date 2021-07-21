@@ -5,7 +5,6 @@
     "license": "MIT",
     "keywords": [
         "andrey-helldar",
-        "helldar",
         "bank",
         "billing",
         "cashier",
@@ -30,11 +29,17 @@
     },
     "require-dev": {
         "andrey-helldar/cashier": "^1.0",
-        "symfony/var-dumper": "^5.0"
+        "symfony/var-dumper": "^4.0|^5.0",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
             "Helldar\\CashierDriver\\Tinkoff\\Auth\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
         }
     },
     "config": {
