@@ -3,14 +3,11 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
 use Carbon\Carbon;
-use Helldar\Support\Concerns\Makeable;
 use Helldar\Support\Facades\Helpers\Arr;
 use Illuminate\Contracts\Support\Arrayable;
 
-class AccessToken implements Arrayable
+class AccessToken extends Base implements Arrayable
 {
-    use Makeable;
-
     protected $access_token;
 
     protected $terminal;
@@ -50,7 +47,7 @@ class AccessToken implements Arrayable
         ];
     }
 
-    protected function set(array $items)
+    protected function set(array $items): void
     {
         foreach ($items as $key => $value) {
             if (property_exists($this, $key)) {

@@ -2,13 +2,10 @@
 
 namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
-use Helldar\Support\Concerns\Makeable;
 use Helldar\Support\Facades\Helpers\Arr;
 
-class Client
+class Client extends Base
 {
-    use Makeable;
-
     protected $client_id;
 
     protected $client_secret;

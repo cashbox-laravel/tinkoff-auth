@@ -93,7 +93,7 @@ class AccessTokenTest extends TestCase
     public function testEmpty()
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('Returns value must be string, null given');
+        $this->expectExceptionMessage(AccessToken::class . '::getTerminalId() must be of the type string, null returned');
 
         $instance = AccessToken::make();
 
