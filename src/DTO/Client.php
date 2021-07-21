@@ -14,7 +14,7 @@ class Client extends Base
 
     protected $data = [];
 
-    public function clientId(string $client_id): Client
+    public function clientId(string $client_id): self
     {
         $this->client_id = $client_id;
 
@@ -26,7 +26,7 @@ class Client extends Base
         return $this->client_id;
     }
 
-    public function clientSecret(string $client_secret): Client
+    public function clientSecret(string $client_secret): self
     {
         $this->client_secret = $client_secret;
 
@@ -38,14 +38,14 @@ class Client extends Base
         return $this->client_secret;
     }
 
-    public function hash(bool $hash = true): Client
+    public function hash(bool $hash = true): self
     {
         $this->hash = $hash;
 
         return $this;
     }
 
-    public function data(array $data): Client
+    public function data(array $data): self
     {
         $this->data = $data;
 
