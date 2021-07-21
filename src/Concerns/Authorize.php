@@ -13,7 +13,7 @@ trait Authorize
 {
     protected function content(array $data, bool $hash = true): array
     {
-        $auth = $this->authorization($hash);
+        $auth = $this->authorization($data, $hash);
 
         return array_merge($data, $auth);
     }
