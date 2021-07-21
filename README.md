@@ -37,14 +37,14 @@ class Driver extends BaseDriver
 {
     use Authorize;
      
-   public function start(): Response
+    public function start(): Response
     {
         $content = $this->content($this->resource->toArray(), false);
     
         // ...
     }
      
-   public function check(): Response
+    public function check(): Response
     {
         $content = $this->content([
             'PaymentId' => $this->model->cashier->payment_id,
