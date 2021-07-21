@@ -30,34 +30,26 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```php
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
-use Helldar\Cashier\Services\Driver as BaseDriver;
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
-use Helldar\CashierDriver\Tinkoff\Auth\Facades\Auth;
+use Helldar\Cashier\Services\Driver as BaseDriver;use Helldar\CashierDriver\Tinkoff\Auth\Concerns\Authorize;
 
 class Driver extends BaseDriver
 {
-    protected function headers(bool $hash = true): array
+    use Authorize;
+     
+   public function start(): Response
     {
-        $headers = [];
-
-        $auth = $this->authorization($hash);
-
-        return array_merge($headers, $auth);
+        $content = $this->content($this->resource->toArray(), false);
+    
+        // ...
     }
-
-    protected function authorization(bool $hash = true): array
+     
+   public function check(): Response
     {
-        $auth = $this->authDto($hash);
-
-        return Auth::accessToken($auth);
-    }
-
-    protected function authDto(bool $hash): Client
-    {
-        return Client::make()
-            ->hash($hash)
-            ->clientId($this->auth->getClientId())
-            ->clientSecret($this->auth->getClientSecret());
+        $content = $this->content([
+            'PaymentId' => $this->model->cashier->payment_id,
+        ]);
+    
+        // ...
     }
 }
 ```
