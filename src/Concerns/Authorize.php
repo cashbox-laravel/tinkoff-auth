@@ -22,7 +22,7 @@ trait Authorize
     {
         $auth = $this->authDto($data, $hash);
 
-        return Auth::accessToken($auth);
+        return Auth::accessToken($auth)->toArray();
     }
 
     protected function authDto(array $data, bool $hash): Client
