@@ -12,6 +12,15 @@ class AuthorizeTest extends TestCase
 
     protected $use_hash;
 
+    public function __get($name)
+    {
+        if ($name === 'auth') {
+            return $this->client($this->use_hash);
+        }
+
+        throw new RuntimeException('Unknown property name.');
+    }
+
     public function testContentBasic()
     {
         $this->use_hash = false;
@@ -96,14 +105,5 @@ class AuthorizeTest extends TestCase
         $this->assertSame($this->terminal_key, $instance->getClientId());
         $this->assertSame($this->token, $instance->getClientSecret());
         $this->assertSame($this->payment_id, $instance->getPaymentId());
-    }
-
-    public function __get($name)
-    {
-        if ($name === 'auth') {
-            return $this->client($this->use_hash);
-        }
-
-        throw new RuntimeException('Unknown property name.');
     }
 }
