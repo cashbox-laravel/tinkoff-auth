@@ -2,9 +2,10 @@
 
 namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
+use Helldar\Contracts\Cashier\Authentication\Client as ClientContract;
 use Helldar\Support\Facades\Helpers\Arr;
 
-class Client extends Base
+class Client extends Base implements ClientContract
 {
     protected $client_id;
 
@@ -14,7 +15,7 @@ class Client extends Base
 
     protected $data = [];
 
-    public function clientId(string $client_id): self
+    public function clientId(string $client_id): ClientContract
     {
         $this->client_id = $client_id;
 
@@ -26,7 +27,7 @@ class Client extends Base
         return $this->client_id;
     }
 
-    public function clientSecret(string $client_secret): self
+    public function clientSecret(string $client_secret): ClientContract
     {
         $this->client_secret = $client_secret;
 

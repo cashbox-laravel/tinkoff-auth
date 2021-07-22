@@ -3,10 +3,11 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
 use Carbon\Carbon;
+use DateTimeInterface;
+use Helldar\Contracts\Cashier\Authentication\Credentials;
 use Helldar\Support\Facades\Helpers\Arr;
-use Illuminate\Contracts\Support\Arrayable;
 
-class AccessToken extends Base implements Arrayable
+class AccessToken extends Base implements Credentials
 {
     protected $access_token;
 
@@ -29,12 +30,12 @@ class AccessToken extends Base implements Arrayable
         return $this->access_token;
     }
 
-    public function getTerminalId(): string
+    public function getClientId(): string
     {
         return $this->terminal;
     }
 
-    public function getExpiresIn(): Carbon
+    public function getExpiresIn(): DateTimeInterface
     {
         return Carbon::now()->addDay();
     }
@@ -42,7 +43,7 @@ class AccessToken extends Base implements Arrayable
     public function toArray(): array
     {
         return [
-            'TerminalKey' => $this->getTerminalId(),
+            'TerminalKey' => $this->getClientId(),
             'Token'       => $this->getAccessToken(),
         ];
     }

@@ -3,38 +3,40 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\Support;
 
 use Helldar\CashierDriver\Tinkoff\Auth\DTO\AccessToken;
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
+use Helldar\Contracts\Cashier\Authentication\Auth as AuthContract;
+use Helldar\Contracts\Cashier\Authentication\Client;
+use Helldar\Contracts\Cashier\Authentication\Credentials;
 use Helldar\Support\Facades\Helpers\Ables\Arrayable;
 
-class Auth
+class Auth implements AuthContract
 {
     protected $terminal_key = 'TerminalKey';
 
     protected $password_key = 'Password';
 
-    public function accessToken(Client $client): array
+    public function accessToken(Client $client): Credentials
     {
         return $this->makeToken(
             $client->getClientId(),
             $client->getClientSecret(),
             $client->getData(),
             $client->hasHash()
-        )->toArray();
+        );
     }
 
-    protected function makeToken(string $terminal, string $secret, array $data, bool $hash): AccessToken
+    protected function makeToken(string $terminal, string $secret, array $data, bool $hash): Credentials
     {
         return $hash
             ? $this->hashed($terminal, $secret, $data)
             : $this->basic($terminal, $secret);
     }
 
-    protected function basic(string $terminal, string $secret): AccessToken
+    protected function basic(string $terminal, string $secret): Credentials
     {
         return $this->items($terminal, $secret);
     }
 
-    protected function hashed(string $terminal, string $secret, array $data): AccessToken
+    protected function hashed(string $terminal, string $secret, array $data): Credentials
     {
         $hash = $this->hash($terminal, $secret, $data);
 
@@ -58,7 +60,7 @@ class Auth
             ->get();
     }
 
-    protected function items(string $terminal, string $access_token): AccessToken
+    protected function items(string $terminal, string $access_token): Credentials
     {
         return AccessToken::make(compact('terminal', 'access_token'));
     }

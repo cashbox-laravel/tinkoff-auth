@@ -62,11 +62,11 @@ class AccessTokenTest extends TestCase
         $this->assertSame($this->credentials(), $instance->toArray());
     }
 
-    public function testTerminalKey()
+    public function testGetClientId()
     {
         $instance = AccessToken::make($this->credentials());
 
-        $this->assertSame($this->terminal_key, $instance->getTerminalId());
+        $this->assertSame($this->terminal_key, $instance->getClientId());
     }
 
     public function testAccessToken()
@@ -98,6 +98,6 @@ class AccessTokenTest extends TestCase
 
         $instance = AccessToken::make();
 
-        $instance->getTerminalId();
+        $instance->getClientId();
     }
 }

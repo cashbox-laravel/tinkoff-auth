@@ -24,12 +24,13 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
+        "andrey-helldar/contracts": "^1.1",
         "andrey-helldar/support": "^4.0",
         "illuminate/contracts": "^6.0|^7.0|^8.0",
         "nesbot/carbon": "^2.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^4.0|^5.0",
+        "symfony/var-dumper": "^5.0",
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {

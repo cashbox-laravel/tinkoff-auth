@@ -3,6 +3,7 @@
 namespace Tests\Facades;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Facades\Auth;
+use Helldar\Contracts\Cashier\Authentication\Credentials;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -13,10 +14,12 @@ class AuthTest extends TestCase
 
         $auth = Auth::accessToken($client);
 
-        $this->assertIsArray($auth);
-        $this->assertNotEmpty($auth);
+        $this->assertInstanceOf(Credentials::class, $auth);
 
-        $this->assertSame($this->credentials(), $auth);
+        $this->assertIsArray($auth->toArray());
+        $this->assertNotEmpty($auth->toArray());
+
+        $this->assertSame($this->credentials(), $auth->toArray());
     }
 
     public function testAccessTokenHashed()
@@ -25,9 +28,11 @@ class AuthTest extends TestCase
 
         $auth = Auth::accessToken($client);
 
-        $this->assertIsArray($auth);
-        $this->assertNotEmpty($auth);
+        $this->assertInstanceOf(Credentials::class, $auth);
 
-        $this->assertSame($this->credentialsHash(), $auth);
+        $this->assertIsArray($auth->toArray());
+        $this->assertNotEmpty($auth->toArray());
+
+        $this->assertSame($this->credentialsHash(), $auth->toArray());
     }
 }
