@@ -8,23 +8,34 @@ use Helldar\Contracts\Cashier\Driver as DriverContract;
 use Helldar\Contracts\Cashier\DTO\Config;
 use Helldar\Contracts\Cashier\Exceptions\Exception;
 use Helldar\Contracts\Cashier\Helpers\Status;
+use Helldar\Contracts\Cashier\Resources\Request as RequestInstance;
 use Helldar\Contracts\Cashier\Resources\Response;
+use Helldar\Support\Concerns\Makeable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method DriverContract make(Config $config)
+ * @method static DriverContract make(Config $config)
  */
 class Driver implements DriverContract
 {
     use Authorize;
+    use Makeable;
 
     protected $config;
 
-    protected $auth;
+    /** @var RequestInstance */
+    protected $request;
 
     public function __construct(Config $config)
     {
         $this->config = $config;
+    }
+
+    public function setConcernRequest(RequestInstance $request): DriverContract
+    {
+        $this->request = $request;
+
+        return $this;
     }
 
     public function getConcernContent(array $data, bool $hash = true): array

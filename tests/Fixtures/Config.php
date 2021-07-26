@@ -3,9 +3,12 @@
 namespace Tests\Fixtures;
 
 use Helldar\Contracts\Cashier\DTO\Config as Contract;
+use Helldar\Support\Concerns\Makeable;
 
 class Config implements Contract
 {
+    use Makeable;
+
     protected $terminal_key;
 
     protected $token;

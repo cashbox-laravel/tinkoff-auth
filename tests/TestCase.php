@@ -7,6 +7,8 @@ use Helldar\Contracts\Cashier\Driver as DriverContract;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Tests\Fixtures\Config;
 use Tests\Fixtures\Driver;
+use Tests\Fixtures\Model;
+use Tests\Fixtures\Request;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -50,12 +52,25 @@ abstract class TestCase extends BaseTestCase
      */
     protected function driver(): DriverContract
     {
-        $config = new Config([
+        $model  = $this->model();
+        $config = $this->config();
+
+        $request = Request::make($model, $config);
+
+        return Driver::make($config)->setConcernRequest($request);
+    }
+
+    protected function config(): Config
+    {
+        return Config::make([
             'terminal_key' => $this->terminal_key,
 
             'token' => $this->token,
         ]);
+    }
 
-        return new Driver($config);
+    protected function model(): Model
+    {
+        return new Model();
     }
 }
