@@ -29,7 +29,7 @@
         "nesbot/carbon": "^2.0"
     },
     "require-dev": {
-        "illuminate/contracts": "^6.0|^7.0|^8.0",
+        "illuminate/database": "^6.0|^7.0|^8.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^5.0"
     },
