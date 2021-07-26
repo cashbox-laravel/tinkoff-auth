@@ -3,18 +3,18 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\Support;
 
 use Helldar\CashierDriver\Tinkoff\Auth\DTO\AccessToken;
-use Helldar\Contracts\Cashier\Authentication\Auth as AuthContract;
+use Helldar\Contracts\Cashier\Authentication\AccessToken as AccessTokenContract;
 use Helldar\Contracts\Cashier\Authentication\Client;
-use Helldar\Contracts\Cashier\Authentication\Credentials;
+use Helldar\Contracts\Cashier\Authentication\Tokenable;
 use Helldar\Support\Facades\Helpers\Ables\Arrayable;
 
-class Auth implements AuthContract
+class Auth implements AccessTokenContract
 {
     protected $terminal_key = 'TerminalKey';
 
     protected $password_key = 'Password';
 
-    public function accessToken(Client $client): Credentials
+    public function getAccessToken(Client $client): Tokenable
     {
         return $this->makeToken(
             $client->getClientId(),
@@ -24,19 +24,19 @@ class Auth implements AuthContract
         );
     }
 
-    protected function makeToken(string $terminal, string $secret, array $data, bool $hash): Credentials
+    protected function makeToken(string $terminal, string $secret, array $data, bool $hash): Tokenable
     {
         return $hash
             ? $this->hashed($terminal, $secret, $data)
             : $this->basic($terminal, $secret);
     }
 
-    protected function basic(string $terminal, string $secret): Credentials
+    protected function basic(string $terminal, string $secret): Tokenable
     {
         return $this->items($terminal, $secret);
     }
 
-    protected function hashed(string $terminal, string $secret, array $data): Credentials
+    protected function hashed(string $terminal, string $secret, array $data): Tokenable
     {
         $hash = $this->hash($terminal, $secret, $data);
 
@@ -60,7 +60,7 @@ class Auth implements AuthContract
             ->get();
     }
 
-    protected function items(string $terminal, string $access_token): Credentials
+    protected function items(string $terminal, string $access_token): Tokenable
     {
         return AccessToken::make(compact('terminal', 'access_token'));
     }

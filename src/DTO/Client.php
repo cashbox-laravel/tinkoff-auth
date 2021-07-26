@@ -15,21 +15,14 @@ class Client extends Base implements ClientContract
 
     protected $data = [];
 
-    public function clientId(string $client_id): ClientContract
-    {
-        $this->client_id = $client_id;
-
-        return $this;
-    }
-
     public function getClientId(): string
     {
         return $this->client_id;
     }
 
-    public function clientSecret(string $client_secret): ClientContract
+    public function setClientId(?string $client_id): ClientContract
     {
-        $this->client_secret = $client_secret;
+        $this->client_id = $client_id;
 
         return $this;
     }
@@ -37,6 +30,13 @@ class Client extends Base implements ClientContract
     public function getClientSecret(): string
     {
         return $this->client_secret;
+    }
+
+    public function setClientSecret(?string $client_secret): ClientContract
+    {
+        $this->client_secret = $client_secret;
+
+        return $this;
     }
 
     public function hash(bool $hash = true): self
@@ -66,5 +66,10 @@ class Client extends Base implements ClientContract
     public function hasHash(): bool
     {
         return $this->hash;
+    }
+
+    public function doesntEmpty(): bool
+    {
+        return ! $this->client_id && ! $this->client_secret;
     }
 }

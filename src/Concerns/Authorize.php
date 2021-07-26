@@ -4,10 +4,11 @@ namespace Helldar\CashierDriver\Tinkoff\Auth\Concerns;
 
 use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
 use Helldar\CashierDriver\Tinkoff\Auth\Facades\Auth;
+use Helldar\Contracts\Cashier\Authentication\Client as ClientContract;
 
 /**
  * @mixin \Helldar\CashierDriver\Tinkoff\QrCode\Driver
- * @mixin \Helldar\Cashier\Services\Driver
+ * @mixin \Helldar\Contracts\Cashier\Driver
  */
 trait Authorize
 {
@@ -20,17 +21,20 @@ trait Authorize
 
     protected function authorization(array $data, bool $hash = true): array
     {
-        $auth = $this->authDto($data, $hash);
+        $auth = $this->authClientDTO($data, $hash);
 
-        return Auth::accessToken($auth)->toArray();
+        return Auth::getAccessToken($auth)->toArray();
     }
 
-    protected function authDto(array $data, bool $hash): Client
+    protected function authClientDTO(array $data, bool $hash): ClientContract
     {
+        /** @var \Helldar\Contracts\Cashier\Authentication\Client $auth */
+        $auth = $this->request->getAuthentication();
+
         return Client::make()
+            ->setClientId($auth->getClientId())
+            ->setClientSecret($auth->getClientSecret())
             ->hash($hash)
-            ->data($data)
-            ->clientId($this->auth->getClientId())
-            ->clientSecret($this->auth->getClientSecret());
+            ->data($data);
     }
 }

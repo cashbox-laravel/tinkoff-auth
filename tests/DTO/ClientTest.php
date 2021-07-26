@@ -27,7 +27,7 @@ class ClientTest extends TestCase
     {
         $instance = Client::make();
 
-        $instance->clientId($this->terminal_key);
+        $instance->setClientId($this->terminal_key);
 
         $this->assertSame($this->terminal_key, $instance->getClientId());
     }
@@ -36,7 +36,7 @@ class ClientTest extends TestCase
     {
         $instance = Client::make();
 
-        $instance->clientSecret($this->token);
+        $instance->setClientSecret($this->token);
 
         $this->assertSame($this->token, $instance->getClientSecret());
     }

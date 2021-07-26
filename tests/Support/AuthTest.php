@@ -3,7 +3,7 @@
 namespace Tests\Support;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
-use Helldar\Contracts\Cashier\Authentication\Credentials;
+use Helldar\Contracts\Cashier\Authentication\Tokenable;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
@@ -12,9 +12,9 @@ class AuthTest extends TestCase
     {
         $client = $this->client(false);
 
-        $auth = $this->authentication()->accessToken($client);
+        $auth = $this->authentication()->getAccessToken($client);
 
-        $this->assertInstanceOf(Credentials::class, $auth);
+        $this->assertInstanceOf(Tokenable::class, $auth);
 
         $this->assertIsArray($auth->toArray());
         $this->assertNotEmpty($auth->toArray());
@@ -26,9 +26,9 @@ class AuthTest extends TestCase
     {
         $client = $this->client();
 
-        $auth = $this->authentication()->accessToken($client);
+        $auth = $this->authentication()->getAccessToken($client);
 
-        $this->assertInstanceOf(Credentials::class, $auth);
+        $this->assertInstanceOf(Tokenable::class, $auth);
 
         $this->assertIsArray($auth->toArray());
         $this->assertNotEmpty($auth->toArray());

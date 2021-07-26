@@ -4,10 +4,10 @@ namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Helldar\Contracts\Cashier\Authentication\Credentials;
+use Helldar\Contracts\Cashier\Authentication\Tokenable;
 use Helldar\Support\Facades\Helpers\Arr;
 
-class AccessToken extends Base implements Credentials
+class AccessToken extends Base implements Tokenable
 {
     protected $access_token;
 

@@ -2,14 +2,11 @@
 
 namespace Tests\Concerns;
 
-use Helldar\CashierDriver\Tinkoff\Auth\Concerns\Authorize;
 use RuntimeException;
 use Tests\TestCase;
 
 class AuthorizeTest extends TestCase
 {
-    use Authorize;
-
     protected $use_hash;
 
     public function __get($name)
@@ -25,7 +22,7 @@ class AuthorizeTest extends TestCase
     {
         $this->use_hash = false;
 
-        $content = $this->content([
+        $content = $this->driver()->getConcernContent([
             'PaymentId' => $this->payment_id,
         ], $this->use_hash);
 
@@ -41,7 +38,7 @@ class AuthorizeTest extends TestCase
     {
         $this->use_hash = true;
 
-        $content = $this->content([
+        $content = $this->driver()->getConcernContent([
             'PaymentId' => $this->payment_id,
         ], $this->use_hash);
 
@@ -57,7 +54,7 @@ class AuthorizeTest extends TestCase
     {
         $this->use_hash = false;
 
-        $auth = $this->authorization([
+        $auth = $this->driver()->getConcernAuthorization([
             'PaymentId' => $this->payment_id,
         ], $this->use_hash);
 
@@ -71,7 +68,7 @@ class AuthorizeTest extends TestCase
     {
         $this->use_hash = true;
 
-        $auth = $this->authorization([
+        $auth = $this->driver()->getConcernAuthorization([
             'PaymentId' => $this->payment_id,
         ], $this->use_hash);
 
@@ -85,7 +82,7 @@ class AuthorizeTest extends TestCase
     {
         $this->use_hash = false;
 
-        $instance = $this->authDto([
+        $instance = $this->driver()->getConcernAuthDTO([
             'PaymentId' => $this->payment_id,
         ], false);
 
@@ -98,7 +95,7 @@ class AuthorizeTest extends TestCase
     {
         $this->use_hash = true;
 
-        $instance = $this->authDto([
+        $instance = $this->driver()->getConcernAuthDTO([
             'PaymentId' => $this->payment_id,
         ], true);
 

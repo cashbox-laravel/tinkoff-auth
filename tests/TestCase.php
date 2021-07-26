@@ -3,7 +3,10 @@
 namespace Tests;
 
 use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
+use Helldar\Contracts\Cashier\Driver as DriverContract;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Tests\Fixtures\Config;
+use Tests\Fixtures\Driver;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -36,9 +39,23 @@ abstract class TestCase extends BaseTestCase
     protected function client(bool $hash = true): Client
     {
         return Client::make()
-            ->clientId($this->terminal_key)
-            ->clientSecret($this->token)
+            ->setClientId($this->terminal_key)
+            ->setClientSecret($this->token)
             ->hash($hash)
             ->data(['PaymentId' => $this->payment_id]);
+    }
+
+    /**
+     * @return \Helldar\Contracts\Cashier\Driver|\Tests\Fixtures\Driver
+     */
+    protected function driver(): DriverContract
+    {
+        $config = new Config([
+            'terminal_key' => $this->terminal_key,
+
+            'token' => $this->token,
+        ]);
+
+        return new Driver($config);
     }
 }
