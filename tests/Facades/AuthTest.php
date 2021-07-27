@@ -3,7 +3,7 @@
 namespace Tests\Facades;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Facades\Auth;
-use Helldar\Contracts\Cashier\Authentication\Tokenable;
+use Helldar\Contracts\Cashier\Auth\Tokenable;
 use Tests\TestCase;
 
 class AuthTest extends TestCase

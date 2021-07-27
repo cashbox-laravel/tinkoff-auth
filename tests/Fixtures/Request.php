@@ -2,8 +2,8 @@
 
 namespace Tests\Fixtures;
 
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
-use Helldar\Contracts\Cashier\Authentication\Client as ClientContract;
+use Helldar\CashierDriver\Tinkoff\Auth\DTO\Clientable;
+use Helldar\Contracts\Cashier\Auth\Client as ClientContract;
 use Helldar\Contracts\Cashier\DTO\Config;
 use Helldar\Contracts\Cashier\Resources\Request as RequestContract;
 use Helldar\Support\Concerns\Makeable;
@@ -22,7 +22,7 @@ class Request implements RequestContract
 
     public function getAuthentication(): ClientContract
     {
-        return Client::make()
+        return Clientable::make()
             ->setClientId($this->config->getClientId())
             ->setClientSecret($this->config->getClientSecret());
     }

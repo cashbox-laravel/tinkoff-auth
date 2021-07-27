@@ -3,7 +3,7 @@
 namespace Tests\Fixtures;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Concerns\Authorize;
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
+use Helldar\CashierDriver\Tinkoff\Auth\DTO\Clientable;
 use Helldar\Contracts\Cashier\Driver as DriverContract;
 use Helldar\Contracts\Cashier\DTO\Config;
 use Helldar\Contracts\Cashier\Exceptions\Exception;
@@ -48,7 +48,7 @@ class Driver implements DriverContract
         return $this->authorization($data, $hash);
     }
 
-    public function getConcernAuthDTO(array $data, bool $hash): Client
+    public function getConcernAuthDTO(array $data, bool $hash): Clientable
     {
         return $this->authClientDTO($data, $hash);
     }

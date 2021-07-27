@@ -2,9 +2,9 @@
 
 namespace Helldar\CashierDriver\Tinkoff\Auth\Concerns;
 
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
+use Helldar\CashierDriver\Tinkoff\Auth\DTO\Clientable;
 use Helldar\CashierDriver\Tinkoff\Auth\Facades\Auth;
-use Helldar\Contracts\Cashier\Authentication\Client as ClientContract;
+use Helldar\Contracts\Cashier\Auth\Client as ClientContract;
 
 /**
  * @mixin \Helldar\CashierDriver\Tinkoff\QrCode\Driver
@@ -28,10 +28,10 @@ trait Authorize
 
     protected function authClientDTO(array $data, bool $hash): ClientContract
     {
-        /** @var \Helldar\Contracts\Cashier\Authentication\Client $auth */
+        /** @var \Helldar\Contracts\Cashier\Auth\Client $auth */
         $auth = $this->request->getAuthentication();
 
-        return Client::make()
+        return Clientable::make()
             ->setClientId($auth->getClientId())
             ->setClientSecret($auth->getClientSecret())
             ->hash($hash)

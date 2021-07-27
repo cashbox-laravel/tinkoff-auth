@@ -3,8 +3,8 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\Facades;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth as Support;
-use Helldar\Contracts\Cashier\Authentication\Client;
-use Helldar\Contracts\Cashier\Authentication\Tokenable;
+use Helldar\Contracts\Cashier\Auth\Client;
+use Helldar\Contracts\Cashier\Auth\Tokenable;
 use Helldar\Support\Facades\Facade;
 
 /**

@@ -3,9 +3,9 @@
 namespace Helldar\CashierDriver\Tinkoff\Auth\Support;
 
 use Helldar\CashierDriver\Tinkoff\Auth\DTO\AccessToken;
-use Helldar\Contracts\Cashier\Authentication\AccessToken as AccessTokenContract;
-use Helldar\Contracts\Cashier\Authentication\Client;
-use Helldar\Contracts\Cashier\Authentication\Tokenable;
+use Helldar\Contracts\Cashier\Auth\AccessToken as AccessTokenContract;
+use Helldar\Contracts\Cashier\Auth\Client;
+use Helldar\Contracts\Cashier\Auth\Tokenable;
 use Helldar\Support\Facades\Helpers\Ables\Arrayable;
 
 class Auth implements AccessTokenContract

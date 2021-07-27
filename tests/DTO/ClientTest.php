@@ -2,14 +2,14 @@
 
 namespace Tests\DTO;
 
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
+use Helldar\CashierDriver\Tinkoff\Auth\DTO\Clientable;
 use Tests\TestCase;
 
 class ClientTest extends TestCase
 {
     public function testGetPaymentId()
     {
-        $instance = Client::make()->data([
+        $instance = Clientable::make()->data([
             'PaymentId' => $this->payment_id,
         ]);
 
@@ -18,14 +18,14 @@ class ClientTest extends TestCase
 
     public function testGetNullPaymentId()
     {
-        $instance = Client::make();
+        $instance = Clientable::make();
 
         $this->assertNull($instance->getPaymentId());
     }
 
     public function testGetClientId()
     {
-        $instance = Client::make();
+        $instance = Clientable::make();
 
         $instance->setClientId($this->terminal_key);
 
@@ -34,7 +34,7 @@ class ClientTest extends TestCase
 
     public function testGetClientSecret()
     {
-        $instance = Client::make();
+        $instance = Clientable::make();
 
         $instance->setClientSecret($this->token);
 
@@ -43,7 +43,7 @@ class ClientTest extends TestCase
 
     public function testHasHash()
     {
-        $instance = Client::make();
+        $instance = Clientable::make();
 
         $this->assertTrue($instance->hasHash());
 
@@ -58,7 +58,7 @@ class ClientTest extends TestCase
 
     public function testEmptyData()
     {
-        $instance = Client::make();
+        $instance = Clientable::make();
 
         $this->assertIsArray($instance->getData());
         $this->assertEmpty($instance->getData());
@@ -66,7 +66,7 @@ class ClientTest extends TestCase
 
     public function testFilledData()
     {
-        $instance = Client::make();
+        $instance = Clientable::make();
 
         $instance->data($this->credentials());
 

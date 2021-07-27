@@ -2,10 +2,10 @@
 
 namespace Helldar\CashierDriver\Tinkoff\Auth\DTO;
 
-use Helldar\Contracts\Cashier\Authentication\Client as ClientContract;
+use Helldar\Contracts\Cashier\Auth\Client as ClientContract;
 use Helldar\Support\Facades\Helpers\Arr;
 
-class Client extends Base implements ClientContract
+class Clientable extends Base implements ClientContract
 {
     protected $client_id;
 

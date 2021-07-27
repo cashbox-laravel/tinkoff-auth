@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Client;
+use Helldar\CashierDriver\Tinkoff\Auth\DTO\Clientable;
 use Helldar\Contracts\Cashier\Driver as DriverContract;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Tests\Fixtures\Config;
@@ -38,9 +38,9 @@ abstract class TestCase extends BaseTestCase
         ];
     }
 
-    protected function client(bool $hash = true): Client
+    protected function client(bool $hash = true): Clientable
     {
-        return Client::make()
+        return Clientable::make()
             ->setClientId($this->terminal_key)
             ->setClientSecret($this->token)
             ->hash($hash)
