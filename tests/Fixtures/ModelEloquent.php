@@ -9,12 +9,12 @@ use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 /**
- * @property-read string $client_id
- * @property-read string $client_secret
- * @property-read string $payment_id
- * @property-read string $sum
- * @property-read string $currency
- * @property-read string $created_at
+ * @property string $client_id
+ * @property string $client_secret
+ * @property string $payment_id
+ * @property string $sum
+ * @property string $currency
+ * @property string $created_at
  */
 class ModelEloquent extends Model
 {
