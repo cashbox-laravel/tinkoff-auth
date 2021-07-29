@@ -2,32 +2,41 @@
 
 namespace Tests;
 
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\Clientable;
-use Helldar\Contracts\Cashier\Driver as DriverContract;
-use PHPUnit\Framework\TestCase as BaseTestCase;
-use Tests\Fixtures\Config;
-use Tests\Fixtures\Driver;
-use Tests\Fixtures\Model;
-use Tests\Fixtures\Request;
+use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+use Helldar\Contracts\Cashier\Resources\Model;
+use Helldar\Contracts\Cashier\Resources\Request;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use Tests\Fixtures\ModelEloquent;
+use Tests\Fixtures\ModelResource;
 
 abstract class TestCase extends BaseTestCase
 {
-    protected $terminal_key = '1234567890';
+    public const TERMINAL_KEY = '1234567890';
 
-    protected $token = '5szqkybmwvjcgcb7';
+    public const TOKEN = '5szqkybmwvjcgcb7';
 
-    protected $hash = '16237a729273fbf1b5224906a40ea601664660b77aabcdaecab505b16ed0f545';
+    public const TOKEN_HASH = '16237a729273fbf1b5224906a40ea601664660b77aabcdaecab505b16ed0f545';
 
-    protected $payment_id = '123456';
+    public const PAYMENT_ID = '123456';
+
+    public const SUM = 123.45;
+
+    public const SUM_RESULT = 12345;
+
+    public const CURRENCY = '123';
+
+    public const CREATED_AT = '2021-07-29 18:51:03';
+
+    public const CREATED_AT_RESULT = '2021-07-29T18:51:03Z';
 
     protected function credentials(): array
     {
-        return $this->auth($this->terminal_key, $this->token);
+        return $this->auth(self::TERMINAL_KEY, self::TOKEN);
     }
 
     protected function credentialsHash(): array
     {
-        return $this->auth($this->terminal_key, $this->hash);
+        return $this->auth(self::TERMINAL_KEY, self::TOKEN_HASH);
     }
 
     protected function auth(string $terminal, string $secret): array
@@ -38,39 +47,15 @@ abstract class TestCase extends BaseTestCase
         ];
     }
 
-    protected function client(bool $hash = true): Clientable
-    {
-        return Clientable::make()
-            ->setClientId($this->terminal_key)
-            ->setClientSecret($this->token)
-            ->hash($hash)
-            ->data(['PaymentId' => $this->payment_id]);
-    }
-
-    /**
-     * @return \Helldar\Contracts\Cashier\Driver|\Tests\Fixtures\Driver
-     */
-    protected function driver(): DriverContract
-    {
-        $model  = $this->model();
-        $config = $this->config();
-
-        $request = Request::make($model, $config);
-
-        return Driver::make($config)->setConcernRequest($request);
-    }
-
-    protected function config(): Config
-    {
-        return Config::make([
-            'terminal_key' => $this->terminal_key,
-
-            'token' => $this->token,
-        ]);
-    }
-
     protected function model(): Model
     {
-        return new Model();
+        $eloquent = new ModelEloquent();
+
+        return new ModelResource($eloquent);
+    }
+
+    protected function request(): Request
+    {
+        return Fixtures\Request::make($this->model(), Auth::class);
     }
 }

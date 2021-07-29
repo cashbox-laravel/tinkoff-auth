@@ -1,67 +1,58 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Helldar\CashierDriver\Tinkoff\Auth\Support;
 
-use Helldar\CashierDriver\Tinkoff\Auth\DTO\AccessToken;
-use Helldar\Contracts\Cashier\Auth\AccessToken as AccessTokenContract;
-use Helldar\Contracts\Cashier\Auth\Client;
-use Helldar\Contracts\Cashier\Auth\Tokenable;
-use Helldar\Support\Facades\Helpers\Ables\Arrayable;
+use Helldar\CashierDriver\Tinkoff\Auth\Constants\Keys;
+use Helldar\CashierDriver\Tinkoff\Auth\Resources\AccessToken;
+use Helldar\Contracts\Cashier\Auth\Auth as AuthContract;
+use Helldar\Contracts\Cashier\Resources\Model;
+use Helldar\Contracts\Cashier\Resources\Request;
+use Helldar\Support\Concerns\Makeable;
 
-class Auth implements AccessTokenContract
+/** @method static Auth make(Model $model, Request $request, bool $hash = true) */
+class Auth implements AuthContract
 {
-    protected $terminal_key = 'TerminalKey';
+    use Makeable;
 
-    protected $password_key = 'Password';
+    /** @var \Helldar\Contracts\Cashier\Resources\Model */
+    protected $model;
 
-    public function getAccessToken(Client $client): Tokenable
+    /** @var \Helldar\Contracts\Cashier\Resources\Request */
+    protected $request;
+
+    /** @var bool */
+    protected $hash;
+
+    public function __construct(Model $model, Request $request, bool $hash = true)
     {
-        return $this->makeToken(
-            $client->getClientId(),
-            $client->getClientSecret(),
-            $client->getData(),
-            $client->hasHash()
+        $this->model   = $model;
+        $this->request = $request;
+        $this->hash    = $hash;
+    }
+
+    public function headers(): array
+    {
+        return $this->request->getRawHeaders();
+    }
+
+    public function body(): array
+    {
+        $token = $this->getAccessToken();
+
+        return array_merge($this->request->getRawBody(), [
+            Keys::TERMINAL => $token->getClientId(),
+            Keys::TOKEN    => $token->getAccessToken(),
+        ]);
+    }
+
+    protected function getAccessToken(): AccessToken
+    {
+        return Hash::make()->get(
+            $this->model,
+            $this->request->getRawBody(),
+            $this->hash
         );
-    }
-
-    protected function makeToken(string $terminal, string $secret, array $data, bool $hash): Tokenable
-    {
-        return $hash
-            ? $this->hashed($terminal, $secret, $data)
-            : $this->basic($terminal, $secret);
-    }
-
-    protected function basic(string $terminal, string $secret): Tokenable
-    {
-        return $this->items($terminal, $secret);
-    }
-
-    protected function hashed(string $terminal, string $secret, array $data): Tokenable
-    {
-        $hash = $this->hash($terminal, $secret, $data);
-
-        return $this->items($terminal, $hash);
-    }
-
-    protected function hash(string $terminal, string $secret, array $data): string
-    {
-        $items = $this->prepare($terminal, $secret, $data);
-
-        return hash('sha256', implode('', $items));
-    }
-
-    protected function prepare(string $terminal, string $secret, array $data): array
-    {
-        return Arrayable::of($data)
-            ->set($this->terminal_key, $terminal)
-            ->set($this->password_key, $secret)
-            ->ksort()
-            ->values()
-            ->get();
-    }
-
-    protected function items(string $terminal, string $access_token): Tokenable
-    {
-        return AccessToken::make(compact('terminal', 'access_token'));
     }
 }
