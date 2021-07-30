@@ -24,8 +24,8 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
-        "andrey-helldar/cashier": "^1.0-BETA7",
-        "andrey-helldar/contracts": "^1.5-BETA4",
+        "andrey-helldar/cashier": "^1.0-BETA9",
+        "andrey-helldar/contracts": "^1.5-BETA10",
         "andrey-helldar/simple-data-transfer-object": "^1.0",
         "andrey-helldar/support": "^4.0",
         "illuminate/support": "^6.0|^7.0|^8.0"

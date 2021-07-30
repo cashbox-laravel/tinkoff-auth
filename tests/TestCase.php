@@ -3,8 +3,8 @@
 namespace Tests;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+use Helldar\Contracts\Cashier\Http\Requests\Request;
 use Helldar\Contracts\Cashier\Resources\Model;
-use Helldar\Contracts\Cashier\Resources\Request;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Tests\Fixtures\ModelEloquent;
 use Tests\Fixtures\ModelResource;
