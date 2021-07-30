@@ -39,14 +39,14 @@ class Driver extends BaseDriver
 {
     public function start(): Response
     {
-        $request = Request::make($this->model, Auth::class);
+        $request = Request::make($this->model, Auth::class, false);
 
         return $this->request($request, Response::class);
     }
      
     public function check(): Response
     {
-        $request = Request::make($this->model, Auth::class, false));
+        $request = Request::make($this->model, Auth::class));
 
         return $this->request($request, Response::class;
     }
