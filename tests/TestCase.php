@@ -18,7 +18,7 @@
 namespace Tests;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
-use Helldar\Contracts\Cashier\Http\Requests\Request;
+use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Model;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Tests\Fixtures\ModelEloquent;

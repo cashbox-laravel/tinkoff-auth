@@ -19,7 +19,7 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-use Helldar\Cashier\Resources\Request as BaseRequest;
+use Helldar\Cashier\Http\Request as BaseRequest;
 
 class Request extends BaseRequest
 {

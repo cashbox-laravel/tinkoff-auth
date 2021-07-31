@@ -22,7 +22,7 @@ namespace Helldar\CashierDriver\Tinkoff\Auth\Support;
 use Helldar\CashierDriver\Tinkoff\Auth\Constants\Keys;
 use Helldar\CashierDriver\Tinkoff\Auth\Resources\AccessToken;
 use Helldar\Contracts\Cashier\Auth\Auth as AuthContract;
-use Helldar\Contracts\Cashier\Http\Requests\Request;
+use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Model;
 use Helldar\Support\Concerns\Makeable;
 
@@ -34,7 +34,7 @@ class Auth implements AuthContract
     /** @var \Helldar\Contracts\Cashier\Resources\Model */
     protected $model;
 
-    /** @var \Helldar\Contracts\Cashier\Http\Requests\Request */
+    /** @var \Helldar\Contracts\Cashier\Http\Request */
     protected $request;
 
     /** @var bool */
