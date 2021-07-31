@@ -28,27 +28,48 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ## Using
 
 ```php
+namespace Helldar\CashierDriver\Tinkoff\QrCode\Requests;
+
+use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+
+class Init
+{
+    protected $host = 'https://securepay.tinkoff.ru';
+
+    protected $path = '/v2/Init';
+    
+    protected $auth = Auth::class;
+
+    protected $hash = false;
+    
+    public function getRawBody(): array
+    {
+        return [
+            'OrderId' => $this->model->getPaymentId(),
+
+            'Amount' => $this->model->getSum(),
+
+            'Currency' => $this->model->getCurrency(),
+        ];
+    }
+}
+```
+
+```php
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as BaseDriver;
-use Helldar\Contracts\Cashier\Resources\Request;
+use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Init;
 use Helldar\Contracts\Cashier\Resources\Response;
 
 class Driver extends BaseDriver
 {
     public function start(): Response
     {
-        $request = Request::make($this->model, Auth::class, false);
+        $request = Init::make($this->model);
 
         return $this->request($request, Response::class);
-    }
-     
-    public function check(): Response
-    {
-        $request = Request::make($this->model, Auth::class));
-
-        return $this->request($request, Response::class;
     }
 }
 ```
