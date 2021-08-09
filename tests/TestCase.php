@@ -17,7 +17,9 @@
 
 namespace Tests;
 
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+use Helldar\Cashier\Config\Driver;
+use Helldar\Cashier\Constants\Driver as DriverConstant;
+use Helldar\Contracts\Cashier\Config\Driver as DriverCotract;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Model;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -38,7 +40,9 @@ abstract class TestCase extends BaseTestCase
 
     public const SUM_RESULT = 12345;
 
-    public const CURRENCY = '123';
+    public const CURRENCY = 123;
+
+    public const CURRENCY_RESULT = '123';
 
     public const CREATED_AT = '2021-07-29 18:51:03';
 
@@ -66,11 +70,22 @@ abstract class TestCase extends BaseTestCase
     {
         $eloquent = new ModelEloquent();
 
-        return new ModelResource($eloquent);
+        $config = $this->config();
+
+        return new ModelResource($eloquent, $config);
+    }
+
+    protected function config(): DriverCotract
+    {
+        return Driver::make([
+            DriverConstant::CLIENT_ID => self::TERMINAL_KEY,
+
+            DriverConstant::CLIENT_SECRET => self::TOKEN,
+        ]);
     }
 
     protected function request(): Request
     {
-        return Fixtures\Request::make($this->model(), Auth::class);
+        return Fixtures\Request::make($this->model());
     }
 }

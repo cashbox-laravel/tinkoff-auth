@@ -34,7 +34,7 @@ class BodyTest extends TestCase
         $this->assertSame([
             'PaymentId'   => self::PAYMENT_ID,
             'Sum'         => self::SUM_RESULT,
-            'Currency'    => self::CURRENCY,
+            'Currency'    => self::CURRENCY_RESULT,
             'CreatedAt'   => self::CREATED_AT_RESULT,
             'TerminalKey' => self::TERMINAL_KEY,
             'Token'       => self::TOKEN,
@@ -49,7 +49,7 @@ class BodyTest extends TestCase
         $this->assertSame([
             'PaymentId'   => self::PAYMENT_ID,
             'Sum'         => self::SUM_RESULT,
-            'Currency'    => self::CURRENCY,
+            'Currency'    => self::CURRENCY_RESULT,
             'CreatedAt'   => self::CREATED_AT_RESULT,
             'TerminalKey' => self::TERMINAL_KEY,
             'Token'       => self::TOKEN_HASH,
