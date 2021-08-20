@@ -30,7 +30,7 @@
         "illuminate/support": "^6.0|^7.0|^8.0"
     },
     "require-dev": {
-        "andrey-helldar/cashier": "^v1.0-BETA22",
+        "andrey-helldar/cashier": "^v1.0",
         "orchestra/testbench": "^4.0|^5.0|^6.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^4.3.4|^5.0"
