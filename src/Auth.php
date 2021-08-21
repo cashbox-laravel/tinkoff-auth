@@ -17,10 +17,11 @@
 
 declare(strict_types=1);
 
-namespace Helldar\CashierDriver\Tinkoff\Auth\Support;
+namespace Helldar\CashierDriver\Tinkoff\Auth;
 
 use Helldar\CashierDriver\Tinkoff\Auth\Constants\Keys;
 use Helldar\CashierDriver\Tinkoff\Auth\Resources\AccessToken;
+use Helldar\CashierDriver\Tinkoff\Auth\Support\Hash;
 use Helldar\Contracts\Cashier\Auth\Auth as AuthContract;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Model;

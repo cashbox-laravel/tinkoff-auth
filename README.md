@@ -30,7 +30,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```php
 namespace Helldar\CashierDriver\Tinkoff\QrCode\Requests;
 
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+use Helldar\CashierDriver\Tinkoff\Auth\Auth;
 
 class Init
 {
@@ -58,7 +58,6 @@ class Init
 ```php
 namespace Helldar\CashierDriver\Tinkoff\QrCode;
 
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
 use Helldar\CashierDriver\Tinkoff\QrCode\Driver as BaseDriver;
 use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Init;
 use Helldar\Contracts\Cashier\Resources\Response;

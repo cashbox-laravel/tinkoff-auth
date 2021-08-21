@@ -17,9 +17,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Support\Auth;
+namespace Tests\Auth;
 
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Auth;
+use Helldar\CashierDriver\Tinkoff\Auth\Auth;
 use Tests\TestCase;
 
 class BodyTest extends TestCase
