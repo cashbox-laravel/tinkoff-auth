@@ -40,7 +40,7 @@ class Auth implements AuthContract
     /** @var bool */
     protected $hash;
 
-    public function __construct(Model $model, Request $request, bool $hash = true)
+    public function __construct(Model $model, Request $request, bool $hash = true, array $extra = [])
     {
         $this->model   = $model;
         $this->request = $request;
