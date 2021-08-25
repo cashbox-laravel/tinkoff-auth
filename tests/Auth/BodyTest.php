@@ -24,7 +24,7 @@ use Tests\TestCase;
 
 class BodyTest extends TestCase
 {
-    public const TOKEN_HASH = '670e06c2ca4d9c73629285eb2201c148c81d587877d1f5836a2f64f45d0f5556';
+    public const TOKEN_HASH = '714bee21f51693eb5effb1895560f2a50dac0e795d5859a06b94bbdbe26faa1d';
 
     public function testBasic()
     {
