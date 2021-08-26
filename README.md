@@ -7,6 +7,8 @@ Tinkoff API Authorization Driver.
 [![Total Downloads][badge_downloads]][link_packagist]
 [![License][badge_license]][link_license]
 
+> **Note:** This driver doesn't need to be installed in the application. I's needed to implement [Tinkoff](https://www.tinkoff.ru/eng) bank authorization for [Cashier](https://github.com/andrey-helldar/cashier) drivers.
+
 ## Installation
 
 To get the latest version of `Tinkoff Auth Cashier Driver`, simply require the project using [Composer](https://getcomposer.org):
@@ -27,49 +29,41 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 
 ## Using
 
+### Without Hashed Token
+
+In some cases, for example, to initialize a payment session, it is necessary to transmit `terminal_key` and `terminal_secret` in clear text. In such cases, the `$hash = false`
+parameter must be specified in the request.
+
 ```php
 namespace Helldar\CashierDriver\Tinkoff\QrCode\Requests;
 
+use Helldar\Cashier\Http\Request;
 use Helldar\CashierDriver\Tinkoff\Auth\Auth;
 
-class Init
+class Init extends Request
 {
-    protected $host = 'https://securepay.tinkoff.ru';
-
-    protected $path = '/v2/Init';
-    
+    // You need to provide a link to the authorization class:
     protected $auth = Auth::class;
 
     protected $hash = false;
-    
-    public function getRawBody(): array
-    {
-        return [
-            'OrderId' => $this->model->getPaymentId(),
-
-            'Amount' => $this->model->getSum(),
-
-            'Currency' => $this->model->getCurrency(),
-        ];
-    }
 }
 ```
 
+### With Hashed Token
+
+In cases where the request must be signed with a special hashed token, you must set the `$hash` variable to `true`.
+
 ```php
-namespace Helldar\CashierDriver\Tinkoff\QrCode;
+namespace Helldar\CashierDriver\Tinkoff\QrCode\Requests;
 
-use Helldar\CashierDriver\Tinkoff\QrCode\Driver as BaseDriver;
-use Helldar\CashierDriver\Tinkoff\QrCode\Requests\Init;
-use Helldar\Contracts\Cashier\Resources\Response;
+use Helldar\Cashier\Http\Request;
+use Helldar\CashierDriver\Tinkoff\Auth\Auth;
 
-class Driver extends BaseDriver
+class Get extends Request
 {
-    public function start(): Response
-    {
-        $request = Init::make($this->model);
+    protected $auth = Auth::class;
 
-        return $this->request($request, Response::class);
-    }
+    protected $hash = true;
 }
 ```
 
