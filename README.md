@@ -37,8 +37,8 @@ parameter must be specified in the request.
 ```php
 namespace CashierProvider\Tinkoff\QrCode\Requests;
 
+use CashierProvider\Core\Http\Request;
 use CashierProvider\Tinkoff\Auth\Auth;
-use Helldar\Cashier\Http\Request;
 
 class Init extends Request
 {
@@ -56,8 +56,8 @@ In cases where the request must be signed with a special hashed token, you must 
 ```php
 namespace CashierProvider\Tinkoff\QrCode\Requests;
 
+use CashierProvider\Core\Http\Request;
 use CashierProvider\Tinkoff\Auth\Auth;
-use Helldar\Cashier\Http\Request;
 
 class Get extends Request
 {
