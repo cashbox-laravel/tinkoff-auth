@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-auth" project.
+ * This file is part of the "cashier-provider/tinkoff-auth" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,16 +12,16 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-auth
+ * @see https://github.com/cashier-provider/tinkoff-auth
  */
 
 declare(strict_types=1);
 
-namespace Helldar\CashierDriver\Tinkoff\Auth;
+namespace CashierProvider\Tinkoff\Auth;
 
-use Helldar\CashierDriver\Tinkoff\Auth\Constants\Keys;
-use Helldar\CashierDriver\Tinkoff\Auth\Resources\AccessToken;
-use Helldar\CashierDriver\Tinkoff\Auth\Support\Hash;
+use CashierProvider\Tinkoff\Auth\Constants\Keys;
+use CashierProvider\Tinkoff\Auth\Resources\AccessToken;
+use CashierProvider\Tinkoff\Auth\Support\Hash;
 use Helldar\Contracts\Cashier\Auth\Auth as AuthContract;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Model;

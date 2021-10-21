@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-auth" project.
+ * This file is part of the "cashier-provider/tinkoff-auth" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,13 +12,13 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-auth
+ * @see https://github.com/cashier-provider/tinkoff-auth
  */
 
 namespace Tests;
 
-use Helldar\Cashier\Config\Driver;
-use Helldar\Cashier\Constants\Driver as DriverConstant;
+use CashierProvider\Core\Config\Driver;
+use CashierProvider\Core\Constants\Driver as DriverConstant;
 use Helldar\Contracts\Cashier\Config\Driver as DriverCotract;
 use Helldar\Contracts\Cashier\Http\Request;
 use Helldar\Contracts\Cashier\Resources\Model;
