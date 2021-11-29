@@ -22,7 +22,7 @@ Or manually update `require` block of `composer.json` and run `composer update`.
 ```json
 {
     "require": {
-        "cashier-provider/tinkoff-auth": "^1.0"
+        "cashier-provider/tinkoff-auth": "^2.0"
     }
 }
 ```
