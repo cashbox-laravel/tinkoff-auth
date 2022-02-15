@@ -24,9 +24,9 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "ext-json": "*",
-        "cashier-provider/core": "^2.5",
+        "cashier-provider/core": "^3.0",
         "dragon-code/contracts": "^2.0",
-        "dragon-code/simple-data-transfer-object": "^2.0",
+        "dragon-code/simple-dto": "^2.2",
         "dragon-code/support": "^5.0",
         "illuminate/support": "^6.0 || ^7.0 || ^8.0 || ^9.0"
     },
