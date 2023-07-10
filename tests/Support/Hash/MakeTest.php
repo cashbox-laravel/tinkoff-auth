@@ -17,13 +17,24 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Auth\Constants;
+namespace Tests\Support\Hash;
 
-class Keys
+use CashierProvider\Tinkoff\Auth\Support\Hash;
+use Tests\TestCase;
+
+class MakeTest extends TestCase
 {
-    public const TERMINAL = 'TerminalKey';
+    public function testMake()
+    {
+        $hash = Hash::make();
 
-    public const TOKEN = 'Token';
+        $this->assertInstanceOf(Hash::class, $hash);
+    }
 
-    public const PASSWORD = 'Password';
+    public function testConstruct()
+    {
+        $hash = new Hash();
+
+        $this->assertInstanceOf(Hash::class, $hash);
+    }
 }
